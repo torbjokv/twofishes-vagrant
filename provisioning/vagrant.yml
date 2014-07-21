@@ -1,0 +1,23 @@
+- name: Install software
+  hosts: all
+  sudo: yes
+  tasks:
+  - include: common.yml
+
+- name: Install roles
+  hosts: all
+  sudo: yes
+  roles:
+    - java
+    - mongodb
+
+- name: Add swap
+  hosts: all
+  sudo: yes
+  tasks:
+  - include: tasks/add_swap.yml
+
+- name: Install twofishes
+  hosts: all
+  tasks:
+  - include: tasks/add_twofishes.yml

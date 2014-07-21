@@ -1,0 +1,30 @@
+- file: path=server/logs state=directory recurse=yes
+
+- name: Download twofishes server
+  get_url: url={{twofishes_jar_url}}{{twofishes_jar_name}} dest=server/{{twofishes_jar_name}}
+
+- file: src={{twofishes_jar_name}} dest=server/twofishes-server-current.jar state=link
+
+- name: Download twofishes index 
+  get_url: url={{twofishes_index_zip_url}}{{twofishes_index_zip_name}} dest=server/{{twofishes_index_zip_name}}
+
+- name: Unzip index
+  shell: unzip server/{{twofishes_index_zip_name}} -d server/ 
+  args:
+    creates: server/latest
+
+- name: Add init.d file for twofishes
+  sudo: yes
+  template:
+    src=files/twofishes_init_d.j2
+    dest=/etc/init.d/twofishes
+    owner=root group=root mode=0755
+
+- name: Add twofishes init.d to defaults
+  sudo: yes
+  shell: update-rc.d twofishes defaults
+
+
+- name: twofishes-restart
+  sudo: yes
+  service: name=twofishes state=restarted

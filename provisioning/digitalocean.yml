@@ -1,0 +1,46 @@
+---
+- name: Initialization of servers
+  hosts: local
+  tasks:
+  - name: Check precence of twofishesservers
+    digital_ocean: >
+        state=present
+        command=droplet
+        unique_name=true
+        name={{ item }}
+        image_id=433240
+        size_id=66
+        region_id=5
+        wait_timeout=500
+        ssh_key_ids=103940
+    register: twofishesservers
+    with_items: twofishesservers_targets
+  - add_host: >
+        name={{ item.droplet.name }} 
+        groups=twofishesservers 
+        digital_ocean_id={{ item.droplet.id }} 
+        ansible_ssh_host={{ item.droplet.ip_address }} 
+        ansible_connection=ssh 
+        ansible_ssh_user=root
+    with_items: twofishesservers.results
+
+- name: Install software
+  hosts: twofishesservers
+  tasks:
+    - include: common.yml
+
+- name: Install roles
+  hosts: twofishesservers
+  roles:
+    - java
+    - mongodb
+
+- name: Add swap
+  hosts: all
+  tasks:
+  - include: tasks/add_swap.yml
+
+- name: Install twofishes
+  hosts: all
+  tasks:
+  - include: tasks/add_twofishes.yml

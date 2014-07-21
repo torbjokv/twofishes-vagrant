@@ -1,0 +1,9 @@
+.DS_Store
+*.swp
+tmp/
+nbproject
+.idea/*
+*.iml
+logs/
+.vagrant
+server/

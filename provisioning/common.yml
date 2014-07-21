@@ -1,0 +1,23 @@
+- name: Update and upgrade apt
+  apt: update_cache=yes #upgrade=yes
+
+- copy: src=files/locale dest=/etc/default/locale
+
+- command: 'cp /usr/share/zoneinfo/UTC /etc/localtime'
+
+- apt: pkg=git state=present
+
+- apt: pkg=vim state=present
+
+- apt: pkg=unzip state=present
+
+- apt: pkg=curl state=present
+
+- apt: pkg=fail2ban state=present
+
+- apt: pkg=software-properties-common state=present
+
+- apt: pkg=python-software-properties state=present
+
+- name: install python-pycurl
+  apt: pkg=python-pycurl state=latest

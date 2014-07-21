@@ -1,0 +1,58 @@
+#! /bin/sh
+
+# {{ ansible_managed }}
+
+### BEGIN INIT INFO
+# Provides:          twofishes
+# Required-Start:    $all
+# Required-Stop:     $all
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description:
+# Description:
+### END INIT INFO
+
+APP_NAME="twofishes"
+APP_DIR="{{ twofishes_dir }}"
+APP_USER="{{ twofishes_user }}"
+TWOFISHES_INDEX="{{ twofishes_index }}"
+CONSOLE_LOG="$APP_DIR/logs/console.log"
+JAVA_OPTIONS="{{ java_options }}"
+
+start() {
+    su - $APP_USER -c "nohup java $JAVA_OPTIONS -jar $APP_DIR/twofishes-server-current.jar --hfile_basepath $APP_DIR/$TWOFISHES_INDEX &> $CONSOLE_LOG &"
+}
+
+stop() {
+    su - $APP_USER -c "killall -9 $APP_NAME"
+}
+
+case "$1" in
+start)
+    echo "Starting $APP_NAME"
+    start
+    echo "$APP_NAME started"
+    ;;
+
+stop)
+    echo "Stopping $APP_NAME"
+    stop
+    echo "$APP_NAME stopped."
+    ;;
+
+restart)
+    echo  "Restarting $APP_NAME"
+    stop
+    sleep 2
+    start
+    echo "$APP_NAME restarted."
+    ;;
+
+*)
+    echo "Usage: $0 (start|stop|restart)" >&2
+    exit 1
+    ;;
+
+esac
+
+exit 0
