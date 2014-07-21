@@ -26,6 +26,7 @@ This takes time. Grab a coffee - or two!
 - Export your digital ocean api credentials (api version 1) to the console, or add them to your bash profile.
 - Run: 
     ansible-playbook provisioning/digitalocean.yml
+- Enter http://[your server]:8082/ in your browser
 
 ## Thanks to
 
