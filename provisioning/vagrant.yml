@@ -19,5 +19,6 @@
 
 - name: Install twofishes
   hosts: all
+  sudo: yes
   tasks:
   - include: tasks/add_twofishes.yml

@@ -16,24 +16,24 @@ This takes time. Grab a coffee - or two!
 
     Enter http://localhost:8882/ in your browser
 
-    To do a reverse location query, do something like http://localhost:8881/?ll=63.4350351,10.4096522&responseIncludes=PARENTS&maxInterpretations=1&lang=no
+    To do a reverse location query, do something like 
+    http://localhost:8881/?ll=63.4350351,10.4096522&responseIncludes=PARENTS&maxInterpretations=1&lang=no
 
 
 ## To deploy in digital ocean
 
-Modify provisioning/groups_vars/all twofishesservers_targets to your server name
-
-Add your digital ocean credentials to ...
-
-TODO
+- Modify provisioning/groups_vars/all `twofishesservers_targets` to your server name
+- Export your digital ocean api credentials (api version 1) to the console, or add them to your bash profile.
+- Run: 
+    ansible-playbook provisioning/digitalocean.yml
 
 ## Thanks to
 
-https://github.com/foursquare/twofishes
-https://github.com/vrischmann/ansible-role-java
-https://github.com/mortik/ansible-mongodb-role
-https://github.com/ansible/ansible
-https://github.com/mitchellh/vagrant
+- https://github.com/foursquare/twofishes
+- https://github.com/vrischmann/ansible-role-java
+- https://github.com/mortik/ansible-mongodb-role
+- https://github.com/ansible/ansible
+- https://github.com/mitchellh/vagrant
 
 
 ## License

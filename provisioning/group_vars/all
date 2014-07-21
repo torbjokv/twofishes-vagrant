@@ -4,8 +4,8 @@ twofishes_jar_url: http://twofishes.net/binaries/
 twofishes_jar_name: server-assembly-0.82.14.jar
 twofishes_index_zip_url: http://twofishes.net/indexes/revgeo/
 twofishes_index_zip_name: 2014-03-21.zip
-twofishes_user: vagrant
-twofishes_dir: /home/vagrant/server
+twofishes_user: twofishes
+twofishes_dir: /home/twofishes/server
 twofishes_index: latest
 java_options: '-Xms512M -Xmx4096M -XX:MaxPermSize=512M -Xss256M'
 java_versions: 

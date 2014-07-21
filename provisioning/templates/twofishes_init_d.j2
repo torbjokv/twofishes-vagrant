@@ -15,8 +15,8 @@
 APP_NAME="twofishes"
 APP_DIR="{{ twofishes_dir }}"
 APP_USER="{{ twofishes_user }}"
-TWOFISHES_INDEX="{{ twofishes_index }}"
 CONSOLE_LOG="$APP_DIR/logs/console.log"
+TWOFISHES_INDEX="{{ twofishes_index }}"
 JAVA_OPTIONS="{{ java_options }}"
 
 start() {
@@ -24,7 +24,7 @@ start() {
 }
 
 stop() {
-    su - $APP_USER -c "killall -9 $APP_NAME"
+    su - $APP_USER -c "pkill -u $APP_USER java"
 }
 
 case "$1" in
